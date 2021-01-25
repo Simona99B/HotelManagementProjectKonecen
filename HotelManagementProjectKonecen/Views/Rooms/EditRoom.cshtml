@@ -1,0 +1,48 @@
+﻿@model HotelManagementProjectKonecen.Models.Room
+
+@{
+    ViewBag.Title = "EditRoom";
+}
+
+<h2>EditRoom</h2>
+
+@using (Html.BeginForm("EditRoom", "Rooms"))
+{
+    @Html.HiddenFor(m=> m.RoomId)
+    <div class="form-group">
+        @Html.LabelFor(m => m.RoomNumber)
+        @Html.TextBoxFor(m => m.RoomNumber, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m=>m.RoomNumber)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.RoomImage)
+        @Html.TextBoxFor(m => m.RoomImage, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.RoomPrice)
+        @Html.TextBoxFor(m => m.RoomPrice, new { @class = "form-control"})
+        @Html.ValidationMessageFor(m => m.RoomPrice)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.RoomCapacity)
+        @Html.TextBoxFor(m => m.RoomCapacity, new { @class = "form-control"})
+        @Html.ValidationMessageFor(m => m.RoomCapacity)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.RoomDescription)
+        @Html.TextBoxFor(m => m.RoomDescription, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.RoomDescription)
+    </div>
+
+    <button type="submit" class="btn-default">Edit</button>
+
+}
+
+<div>
+
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -1,0 +1,110 @@
+﻿@model IEnumerable<HotelManagementProjectKonecen.Models.Room>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table" id="roomsTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomImage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookingStatusId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomTypeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomCapacity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookedTo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookedFrom)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomNumber)
+            </td>
+            <td>
+                <img style="max-width:200px" src="@item.RoomImage" />
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookingStatusId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomTypeId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomCapacity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookedTo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookedFrom)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.RoomId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.RoomId }) |
+
+                <a class="btn-link js-delete" data-id="@item.RoomId">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts{
+    <script>
+       var table= $("#roomsTable").DataTable();
+        $("#roomsTable .js-delete").click(function () {
+            var button = $(this);
+            bootbox.confirm("Dali ste sigurni deka sakate da ja izbrishete sobata?",
+                function (result) {
+                    if (result) {
+                        $.ajax({
+                            method: "GET",
+                            url: "/Rooms/Delete/" + button.attr("data-id"),
+                            success: function () {
+                                table.row(button.parents("tr")).remove().draw();
+                            }
+                        });
+                    }
+                });
+        });
+
+    </script>
+
+}

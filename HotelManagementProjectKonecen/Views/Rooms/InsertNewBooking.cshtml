@@ -1,0 +1,23 @@
+﻿@model HotelManagementProjectKonecen.Models.RoomBooking
+
+@{
+    ViewBag.Title = "InsertNewBooking";
+}
+
+<h2>Insert new booking for: @Model.room.RoomNumber</h2>
+
+@using (Html.BeginForm("InsertNewBooking", "Rooms"))
+{
+    <div class="form-group">
+        @Html.DropDownListFor(m=>m.BookingId,
+                               new SelectList(Model.Bookings,"BookingId","CustomerName"),
+                               new {@class="from-control"})
+
+        @Html.HiddenFor(m=>m.RoomId)
+    </div>
+
+    <div class="form-group">
+        <button type="submit">Add booking to room</button>
+    </div>
+}
+
